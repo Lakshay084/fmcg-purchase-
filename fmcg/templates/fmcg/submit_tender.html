@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Tender</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <header style="background-color: #f9f9f9; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <h1 style="margin: 0; font-size: 24px; color: #333;">Submit a Tender</h1>
+    </header>
+    <main style="padding: 20px; max-width: 600px; margin: 0 auto;">
+        <section style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <form action="{% url 'submit_tender' %}" method="post" class="tender-form" style="display: flex; flex-direction: column; gap: 15px;">
+                {% csrf_token %}
+                <div style="display: flex; flex-direction: column;">
+                    <label for="id_product_name" style="font-weight: bold;">Product Name:</label>
+                    {{ form.product_name }}
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label for="id_quantity" style="font-weight: bold;">Quantity (in tonnes):</label>
+                    {{ form.quantity }}
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label for="id_rate_per_tonne" style="font-weight: bold;">Rate per Tonne (₹):</label>
+                    {{ form.rate_per_tonne }}
+                </div>
+                <button type="submit" style="padding: 10px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+                    Submit Tender
+                </button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

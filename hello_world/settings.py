@@ -22,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY", default='')
-
+SECRET_KEY = config("SECRET_KEY", default='tls&iubksfoax5cvk^0$q$5^=cp2lqa$4-vg6fzqq-hy-81z-8')
+SECRET_KEY = 'tls&iubksfoax5cvk^0$q$5^=cp2lqa$4-vg6fzqq-hy-81z-8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 if 'CODESPACE_NAME' in os.environ:
     codespace_name = config("CODESPACE_NAME")
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_browser_reload",
+    'fmcg',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +66,8 @@ ROOT_URLCONF = "hello_world.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "hello_world" / "templates"],
+        # "DIRS": [BASE_DIR / "hello_world" / "templates"],
+        "DIRS": [BASE_DIR /"hello_world"/ "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,8 +88,13 @@ WSGI_APPLICATION = "hello_world.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        "NAME":  'fmcg_purchase_db',
+        'USER': 'lakshay_fmcg',
+        'PASSWORD': 'online@123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -116,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
-
 USE_I18N = True
 
 USE_TZ = True
@@ -131,6 +138,7 @@ STATICFILES_DIRS = [
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "hello_world" / "staticfiles"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "hello_world" / "media"

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Progress</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Track Tender Progress</h1>
+    </header>
+    <main>
+        {% if last_tender %}
+        <section>
+            <h2>Tender Details</h2>
+            <p><strong>Product Name:</strong> {{ last_tender.product_name }}</p>
+            <p><strong>Quantity:</strong> {{ last_tender.quantity }} tonnes</p>
+            <p><strong>Status:</strong> 
+                {% if last_tender.status == "Accepted" %}
+                <span style="color: green;">Accepted</span>
+                {% elif last_tender.status == "Rejected" %}
+                <span style="color: red;">Rejected</span>
+                {% else %}
+                <span style="color: orange;">Pending</span>
+                {% endif %}
+            </p>
+            {% if last_tender.delivery_date %}
+            <p><strong>Delivery Date:</strong> {{ last_tender.delivery_date|date:"F d, Y" }}</p>
+            {% endif %}
+        </section>
+        {% else %}
+        <p>No tenders found.</p>
+        {% endif %}
+    </main>
+</body>
+</html>

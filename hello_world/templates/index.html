@@ -1,4 +1,4 @@
-{% load django_browser_reload %}
+<!-- {% load django_browser_reload %}
 {% load static %}
 
 <!doctype html>
@@ -30,4 +30,43 @@
     </div>
 </body>
 
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMCG Platform - Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the FMCG Platform</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'supplier_login' %}">Supplier Login</a></li>
+                <li><a href="{% url 'vendor_login' %}">Vendor Login</a></li>
+                <li><a href="/about/">About Us</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>About the Platform</h2>
+            <p>Your go-to solution for streamlining FMCG procurement and supply chain processes.</p>
+        </section>
+        <section>
+            <h2>Features</h2>
+            <ul>
+                <li>Efficient tendering system for suppliers.</li>
+                <li>Comprehensive vendor management.</li>
+                <li>Real-time order tracking and progress updates.</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 FMCG Platform. All rights reserved.</p>
+    </footer>
+</body>
 </html>

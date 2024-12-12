@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Supplier Dashboard</h1>
+    </header>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="column">
+            <section class="info">
+                <h2>Supplier Information</h2>
+                <p><strong>Supplier ID:</strong> {{ supplier.username }}</p>
+                <p><strong>Supplier Name:</strong> {{ supplier.name }}</p>
+            </section>
+            <section class="rates">
+                <h2>Today's Product Rates</h2>
+                <ul>
+                    <li><strong>Mustard Seed:</strong> ₹{{ rates.mustard_seed }}</li>
+                    <li><strong>Soybean:</strong> ₹{{ rates.soybean }}</li>
+                    <li><strong>Wheat:</strong> ₹{{ rates.wheat }}</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column">
+            <section>
+                <h2>Submit a Tender</h2>
+                <form action="{% url 'submit_tender' %}" method="post" class="tender-form">
+                    {% csrf_token %}
+                    <input type="text" name="product_name" placeholder="Product Name" required>
+                    <input type="number" name="quantity" placeholder="Quantity (in tonnes)" required>
+                    <input type="number" name="rate" placeholder="Rate per tonne" required>
+                    <button type="submit">Submit Tender</button>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="column">
+            <section>
+                <h2>Last Order Tracking</h2>
+                {% if last_order %}
+                <ul>
+                    <li><strong>Order No:</strong> {{ last_order.tender_id }}</li>
+                    <li><strong>Vehicle Arrival:</strong> {{ last_order.vehicle_arrival|default:"Not updated" }}</li>
+                    <li><strong>Quality Checks:</strong> {{ last_order.quality_check|default:"Not updated" }}</li>
+                    <li><strong>Weighing:</strong> {{ last_order.weighing|default:"Not updated" }}</li>
+                    <li><strong>Payment Status:</strong> {{ last_order.payment_status|default:"Not updated" }}</li>
+                </ul>
+                {% else %}
+                <p>No recent orders available for tracking.</p>
+                {% endif %}
+            </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column">
+            <section>
+                <h2>Track Tender Progress</h2>
+                {% if tender_accepted == "Accepted" %}
+                <p class="accepted">Tender Accepted</p>
+                <p><strong>Delivery Date:</strong> {{ tender.delivery_date|date:"F d, Y" }}</p>
+                {% elif tender_accepted == "Rejected" %}
+                <p class="rejected">Tender Rejected. Please contact your broker.</p>
+                {% else %}
+                <p class="pending">Tender is under review or not yet accepted.</p>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</body>
+</html>
+
